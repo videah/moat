@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>moat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/style.css" rel="stylesheet">
+
+    {% block head %}{% endblock %}
+
+    <!-- Popup API Polyfill -->
+    <script src="/static/js/popup.iife.min.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.0.1"></script>
+</head>
+<body>
+    <div class="relative z-0 flex flex-col">
+        <div class="bg-gray-100 border-b border-gray-200">
+            <div class="container mx-auto max-w-screen-md p-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <a href="/" class="text-2xl font-bold text-gray-600 hover:text-gray-900">
+                            moat
+                        </a>
+                    </div>
+                    <div style="position: absolute; top: anchor(--my-anchor-in-line bottom); right: anchor(--my-anchor-in-line right);" class="target" id="user-pop" popup="hint">Hello, World</div>
+                    <button style="anchor-name: --my-anchor-in-line" id="user-pop-button" popuptoggletarget="user-pop" class="anchor flex items-center text-sm font-medium text-gray-900 rounded-full">
+                        {% match user %}
+                            {% when Some with (user) %}
+                                <img class="md:mr-2 w-8 h-8 rounded-full pointer-events-none" src='{{ gravatar::Gravatar::new(user.email).image_url() }}'>
+                                <span class="hidden md:inline pointer-events-none">{{ user.email }}</span>
+                            {% when None %}
+                        {% endmatch %}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto max-w-screen-md px-4">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="/static/color-pick.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div data-color="{{ passkey.color }}" id="color-preview" class="mt-4 card ~{{ passkey.color }} @low flex transition">
+<!--    <div class="flex-shrink-0 relative h-full w-200">-->
+<!--        <span class="icon w-16 h-16 absolute inset-0 z-10 ">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14" viewBox="0 0 20 20" fill="currentColor">-->
+<!--                <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd" />-->
+<!--            </svg>-->
+<!--        </span>-->
+<!--    </div>-->
+    <div class="flex flex-col items-center justify-center w-full">
+        <h1 class="font-bold text-3xl pb-2">{{ passkey.name }}</h1>
+        <h2 class="text-sm">Created on 30 May 2022</h2>
+        <h2 class="text-sm">Last used within the last 2 weeks </h2>
+    </div>
+</div>
+
+<hr class="sep h-4">
+
+<h2 class="heading">Edit passkey</h2>
+<p class="mt-1 text-gray-600">
+    Change information about this keypass such as name and color.
+</p>
+<hr class="sep h-2">
+
+<div>
+    <label for="name-field" class="label">Passkey Name</label>
+    <input id="name-field" value="{{ passkey.name }}" class="my-1 field ~blue" type="text" placeholder="Key Name">
+</div>
+
+<hr class="sep h-2">
+
+{% include "components/color_picker.html" %}
+
+<hr class="sep h-2">
+
+<button class="button ~neutral button-xl">Save</button>
+
+<hr class="sep h-8">
+
+<h2 class="heading">Delete passkey</h2>
+<p class="mt-1 text-gray-600">
+    Permanently delete this passkey. Please be careful as this action cannot be undone.
+    <br/>
+    Enter the name <span class="font-bold">{{ passkey.name }}</span> to confirm.
+</p>
+<hr class="sep h-2">
+<div>
+    <input class="my-1 field ~red w-64" type="text" placeholder="Key Name">
+    <p class="support">The name is case sensitive.</p>
+</div>
+<hr class="sep h-2">
+<button class="button ~red @high button-xl">Delete passkey</button>
+
+<hr class="sep h-8">
+
+<h2 class="heading">Advanced Credential Info</h2>
+<p class="mt-1 mb-2 text-gray-600">
+    The raw passkey credential data as it is stored in the database.
+</p>
+<div class="field !rounded-md text-xs mb-4 overflow-scroll h-400 bg-gray-900 text-white !normal">{{ crate::utils::render_pretty_json(passkey.credential)|safe }}</div>
+
+
+{% endblock %}

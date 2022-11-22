@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="flex justify-between items-center pt-4">
+    <div class="flex items-center">
+        <a href="/" class="heading">
+            Registration Links
+        </a>
+    </div>
+    <a href="/new-key" class="button ~neutral @low">
+        New Link
+    </a>
+</div>
+
+<p class="mt-1 text-gray-600">
+    Registration links allow you to invite users to register by supplying them with a URL.
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Created at</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for link in registration_links %}
+        {% include "components/registration_link.html" %}
+    {% endfor %}
+<!--    <tr>-->
+<!--        <td><span class="chip ~blue font-bold">iCloud Key</span></td>-->
+<!--        <td class="font-mono !hidden sm:!table-cell">8.8.8.8</td>-->
+<!--        <td class="italic">London, GB</td>-->
+<!--        <td>2 days ago</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td><span class="chip ~blue font-bold">iCloud Key</span></td>-->
+<!--        <td class="font-mono !hidden sm:!table-cell">8.8.8.8</td>-->
+<!--        <td class="italic">London, GB</td>-->
+<!--        <td>7 days ago</td>-->
+<!--    </tr>-->
+    </tbody>
+</table>
+
+{% endblock %}

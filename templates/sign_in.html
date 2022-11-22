@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="/static/simple-webauthn.js"></script>
+<script src="/static/authenticate.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="flex h-full justify-center items-center pt-16">
+    <div class="card ~blue auto-mx">
+        <label for="email-field" class="label">E-mail Address</label>
+        <input id="email-field" class="my-1 field ~blue" autocomplete="email webauthn" type="email" placeholder="johndoe@example.com">
+        <p id="email-error" class="support ~red"></p>
+        <button id="auth-button" class="w-full button ~neutral @low button-xl !mt-4">
+            Sign In
+        </button>
+    </div>
+</div>
+{% match redirect %}
+    {% when Some with (redirect) %}
+        <div id="redirect-id" data-link="{{ redirect }}" class="hidden"></div>
+    {% when None %}
+{% endmatch %}
+
+{% endblock %}

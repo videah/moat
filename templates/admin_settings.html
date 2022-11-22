@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex justify-between items-center py-2">
+    <div class="flex items-center">
+        <a href="/" class="heading">
+            Admin Settings
+        </a>
+    </div>
+</div>
+
+<div class="flex flex-col space-y-2">
+    <div>
+        <p class="label">RP Name</p>
+        <p class="text-gray-600">
+            A "nice" name to present to users. Has no security properties and
+            can be easily changed.
+        </p>
+        <input class="my-1 field ~blue" type="text" placeholder="John Doe's Moat">
+    </div>
+
+    <div>
+        <p class="label">Domain</p>
+        <p class="text-gray-600">
+            Cannot be changed as it would invalidate all currently stored passkeys. If a domain change is required
+            it is recommended to setup a moat from scratch.
+        </p>
+        <input value="videah.net" class="my-1 field ~blue" type="text" placeholder="Moat" disabled>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+[package]
+name = "moat"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [".", "entity", "migration"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+rocket-session-store = { git = "https://github.com/AndrolGenhald/rocket-session-store", branch = "improve-security" }
+askama = { git = "https://github.com/djc/askama.git", rev = "8142963", default-features = false, features = ["with-rocket", "mime", "mime_guess"] }
+askama_rocket = { git = "https://github.com/djc/askama.git", rev = "8142963" }
+gravatar = "0.2.0"
+webauthn-rs = "0.4.6"
+webauthn-rs-proto = "0.4.6"
+entity = { path = "entity" }
+migration = { path = "migration" }
+async-trait = "0.1.56"
+jsonxf = "1.1.1"
+syntect = { version = "5.0.0", features = ["default-fancy"] }
+human_id = "0.1.0"
+either = "1.7.0"
+tracing = { version = "0.1.36", features = ["async-await"] }
+tracing-subscriber = "0.3.15"
+urlencoding = "2.1.2"
+
+[dependencies.rocket]
+version = "0.5.0-rc.2"
+features = ["json", "tls"]
+
+[dependencies.sqlx]
+version = "0.5"
+default-features = false
+features = ["macros", "offline", "migrate"]
+
+[dependencies.rocket_db_pools]
+version = "0.1.0-rc.2"
+features = ["sqlx_sqlite"]
+
+[dependencies.rocket_dyn_templates]
+version = "0.1.0-rc.2"
+features = ["tera"]
+
+[dependencies.sea-orm]
+version = "^0.9.1"
+features = [
+    "sqlx-sqlite",
+    "with-chrono",
+    "with-json",
+]
+
+[dependencies.sea-orm-rocket]
+git = "https://github.com/SeaQL/sea-orm"
